@@ -6,7 +6,7 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
-} from "../constants";
+} from "../constants/user";
 
 import axios from 'axios'
 
@@ -68,7 +68,7 @@ export const register = (name, email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:4000/api/user/signup",
+      "http://localhost:5000/api/user/signup",
       { name, email, password },
       config
     );
