@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
       <main className="py-3">
         <Container>{children}</Container>
       </main>
-      <footer style={{ position: "absolute", bottom: 0, width: "100%" }}>
+      <footer style={{ position: "absolute", marginTop: "10vh", width: "100%" }}>
         <Footer />
       </footer>
     </div>
