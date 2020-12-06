@@ -7,11 +7,11 @@ import { useRouter } from "next/router";
 
 const Product = () => {
     const router = useRouter();
-     const { product } = router.query;
-    //const product = products.find((p) => p._id === match.params.id)
-    return (
-        <div>{product}</div>
-      );
+     const {id} = router.query;
+     console.log(products)
+     //const product = products.find(product)
+    
+    return <div> {id} </div>;
 }
  
 export default Product;
