@@ -1,0 +1,5 @@
+Admin:
+CURD Product, confram delevary, confarm payment 
+
+User:
+Add to cart, checkout, payment, review, rating

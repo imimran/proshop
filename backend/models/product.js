@@ -1,29 +1,48 @@
 const { Sequelize, Model } = require("sequelize");
 const sequelize = require("../utils/db");
 
-const User = sequelize.define("user", {
+const Product = sequelize.define("product", {
   id: {
     type: Sequelize.INTEGER,
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
   },
-  name: {
+  title: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  email: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  password: {
+  image: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  isAdmin: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
+  brand: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  category: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  description: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  numReviews: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  rating: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  price: {
+    type: Sequelize.DOUBLE,
+    allowNull: false,
+  },
+  inStock: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
   },
 });
-module.exports = User;
+module.exports = Product; 
