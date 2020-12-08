@@ -1,6 +1,34 @@
 const Product = require("../models/product");
 const { success, fail, validation } = require("../utils/helper");
-const _ = require("lodash");
+const multer = require("multer");
+const path = require("path");
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  // reject a file
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+  },
+  fileFilter: fileFilter,
+});
 
 exports.getAllProduct = async (req, res) => {
   try {
@@ -28,10 +56,18 @@ exports.getProductById = async (req, res) => {
   }
 };
 
-exports.addProduct = async (req, res) => {
+
+(module.exports.upload = upload.single("image")),
+  async (req, res, next) => {
+    const image = req.file.path;
+    console.log(image);
+    next();
+  };
+
+exports.addProduct = async (req, res, next) => {
   try {
     const title = req.body.title;
-    const image = req.body.image;
+    const image = req.file.filename;
     const brand = req.body.brand;
     const category = req.body.category;
     const description = req.body.description;
@@ -63,12 +99,13 @@ exports.addProduct = async (req, res) => {
     res.status(500).json(fail(error, res.statusCode));
     return;
   }
+   next();
 };
 
-exports.editProduct = async (req, res) => {
+exports.editProduct = async (req, res, next) => {
   try {
     const title = req.body.title;
-    const image = req.body.image;
+    const image = req.file.filename;
     const brand = req.body.brand;
     const category = req.body.category;
     const description = req.body.description;
@@ -117,6 +154,7 @@ exports.editProduct = async (req, res) => {
     res.status(501).json(fail(error, res.statusCode));
     return;
   }
+  next()
 };
 
 
