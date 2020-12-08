@@ -9,10 +9,10 @@ const Product = ({ product }) => {
     <>
       <Row>
         <Col md={6}>
-          <Image
-            src={product.results.data.image}
-            alt={product.results.data.title}
-            fluid
+          <Card.Img
+            variant="top"
+            style={{ width: "70%", height:"90%" }}
+            src={`http://localhost:5000/uploads/${product.results.data.image}`}
           />
         </Col>
         <Col md={3}>
@@ -34,7 +34,9 @@ const Product = ({ product }) => {
             <ListGroup.Item>
               Description: {product.results.data.description}
             </ListGroup.Item>
-            <ListGroup.Item>In Stock: {product.results.data.inStock}</ListGroup.Item>
+            <ListGroup.Item>
+              In Stock: {product.results.data.inStock}
+            </ListGroup.Item>
           </ListGroup>
         </Col>
       </Row>
