@@ -1,5 +1,7 @@
 const { Sequelize, Model } = require("sequelize");
 const sequelize = require("../utils/db");
+const Category = require("../models/category");
+const SubCategory = require("../models/subCategory");
 
 const Product = sequelize.define("product", {
   id: {
@@ -17,10 +19,6 @@ const Product = sequelize.define("product", {
     allowNull: false,
   },
   brand: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  category: {
     type: Sequelize.STRING,
     allowNull: false,
   },
@@ -43,6 +41,22 @@ const Product = sequelize.define("product", {
   inStock: {
     type: Sequelize.INTEGER,
     allowNull: false,
+  },
+
+  categoryId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: Category,
+      key: "id",
+    },
+  },
+
+  subcategoryId: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: SubCategory,
+      key: "id",
+    },
   },
 });
 module.exports = Product; 

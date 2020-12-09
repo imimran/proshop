@@ -77,9 +77,9 @@ exports.addProduct = async (req, res, next) => {
     const inStock = req.body.inStock;
     
 
-    if (!title || !image || !brand || !category ||  !description || !numReviews || !rating || !price || !inStock) {
-      return res.status(501).json(validation("Please input all field"));
-    }
+    // if (!title || !image || !brand || !category ||  !description || !numReviews || !rating || !price || !inStock) {
+    //   return res.status(501).json(validation("Please input all field"));
+    // }
 
     const product = await Product.create({
       title: title,
