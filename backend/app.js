@@ -9,6 +9,8 @@ const path = require("path");
 const Category = require('./models/category')
 const SubCategory = require("./models/subCategory");
 const Product = require("./models/product");
+const Cart = require("./models/cart");
+const User = require('./models/user')
 
 //Routers
 const userRouter = require('./routes/user/user')
@@ -16,6 +18,7 @@ const authRouter = require("./routes/user/auth");
 const productRouter = require('./routes/admin/product')
 const categoryRouter = require("./routes/admin/category");
 const subCategoryRouter = require("./routes/admin/subCategory");
+
 
 
 
@@ -40,7 +43,7 @@ const port = process.env.PORT || 5000 ;
 
 //Connect Database
 (async () =>{
-    await sequelize.sync();
+    await sequelize.sync({ alter: true });
     //await sequelize.sync()
     app.listen( port, () => 
     console.log(`Server Running on port ...${port}`)
@@ -49,14 +52,17 @@ const port = process.env.PORT || 5000 ;
 })()
 
 
+User.hasOne(Cart);
+Cart.belongsTo(User);
+
 Category.hasMany(SubCategory);
 SubCategory.belongsTo(Category);
 
-// Category.hasMany(Product);
-// Product.belongsTo(Category);
-
 SubCategory.hasMany(Product);
 Product.belongsTo(SubCategory);
+
+
+
 
 
 
