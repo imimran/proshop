@@ -69,15 +69,15 @@ exports.addProduct = async (req, res, next) => {
     const title = req.body.title;
     const image = req.file.filename;
     const brand = req.body.brand;
-    const category = req.body.category;
+    const categoryId = req.body.categoryId;
+    const subcategoryId = req.body.subcategoryId;
     const description = req.body.description;
     const numReviews = req.body.numReviews;
     const rating = req.body.rating;
     const price = req.body.price;
     const inStock = req.body.inStock;
-    
 
-    // if (!title || !image || !brand || !category ||  !description || !numReviews || !rating || !price || !inStock) {
+    // if (!title || !image || !brand || !categoryId || !subcategoryId ||  !description || !numReviews || !rating || !price || !inStock) {
     //   return res.status(501).json(validation("Please input all field"));
     // }
 
@@ -85,15 +85,15 @@ exports.addProduct = async (req, res, next) => {
       title: title,
       image: image,
       brand: brand,
-      category: category,
+      categoryId: categoryId,
+      subcategoryId:subcategoryId,
       description: description,
       numReviews: numReviews,
       rating: rating,
       price: price,
-      inStock: inStock
-    })
-     res.status(200).json(success("OK", { data: product }, res.statusCode));
-   
+      inStock: inStock,
+    });
+    res.status(200).json(success("OK", { data: product }, res.statusCode));
   } catch (error) {
     console.log(error);
     res.status(500).json(fail(error, res.statusCode));
