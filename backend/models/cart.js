@@ -26,7 +26,10 @@ const Cart = sequelize.define("cart", {
       key: "id",
     },
   },
-  qty: { type: Sequelize.INTEGER, defaultValue: "1" },
+  qty: { 
+      type: Sequelize.INTEGER,
+       defaultValue: "1" 
+    },
 });
 
 module.exports = Cart;
